@@ -37,6 +37,7 @@ function CreateUser({ setErrors, setLoggedIn, setUserInformation }) {
   return (
     <div>
       <h1>Create User</h1>
+      <CreateUserForm signUpUser={signUpUser}/> 
     </div>
   );
 }

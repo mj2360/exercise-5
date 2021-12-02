@@ -6,27 +6,29 @@ import {
 } from "react-router-dom";
 import Header from "./components/Header";
 import CreateUser from "./pages/CreateUser";
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Login from "./pages/Login";
 import UserProfile from "./pages/UserProfile";
 import FirebaseConfig from "./components/FirebaseConfig";
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged, signOUt } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 function App() {
-  const app = initializeApp(FirebaseConfig);
+ // const app = initializeApp(FirebaseConfig);
 
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [loading, setLoading] = useState(true);
 
+  const [appInitialized, setAppIntialized] = useState(false);
+
   const [userInformation, setUserInformation] = useState({});
 
-  const [errors, setErrors] = useState();
 
   useEffect(() => {
     initializeApp(FirebaseConfig);
+    setAppIntialized(true); 
   }, []);
 
   useEffect(() => {
@@ -53,11 +55,10 @@ function App() {
       .then(() => {
         setUserInformation({});
         setLoggedIn(false);
-        setErrors();
       })
       .catch((error) => {
         console.warn(error);
-        setErrors(errorMessage);
+
       });
   }
 
@@ -67,7 +68,6 @@ function App() {
     //better than wrapping in a div
     <>
       <Header logOut={logOut} loggedIn={loggedIn} />
-      {errors && <p className="Error PageWrapper">{errors}</p>}
       <Router>
         <Routes>
           <Route
@@ -87,7 +87,6 @@ function App() {
                 <CreateUser
                   setLoggedIn={setLoggedIn}
                   setUserInformation={setUserInformation}
-                  setErrors={setErrors}
                 />
               ) : (
                 <Navigate to={`/user/${userInformation.uid}`} />
@@ -101,7 +100,6 @@ function App() {
                 <Login
                   setLoggedIn={setLoggedIn}
                   setUserInformation={setUserInformation}
-                  setErrors={setErrors}
                 />
               ) : (
                 <Navigate to={`/user/${userInformation.uid}`} />
