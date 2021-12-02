@@ -29,13 +29,12 @@ function CreateUser({ setErrors, setLoggedIn, setUserInformation }) {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.warn({ error, errorCode, errorMessage });
-          setErrors(errorMessage);
         });
     },
-    [setErrors, setLoggedIn, setUserInformation]
+    [setLoggedIn, setUserInformation]
   );
   return (
-    <div>
+    <div className="PageWrapper">
       <h1>Create User</h1>
       <CreateUserForm signUpUser={signUpUser}/> 
     </div>

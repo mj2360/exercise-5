@@ -83,7 +83,7 @@ function App() {
           <Route
             path="/create"
             element={
-              loggedIn ? (
+              !loggedIn ? (
                 <CreateUser
                   setLoggedIn={setLoggedIn}
                   setUserInformation={setUserInformation}
@@ -96,7 +96,7 @@ function App() {
           <Route
             path="/"
             element={
-              loggedIn ? (
+              !loggedIn ? (
                 <Login
                   setLoggedIn={setLoggedIn}
                   setUserInformation={setUserInformation}

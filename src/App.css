@@ -26,6 +26,13 @@
     margin-right: 0;
     padding-right: 0;
   }
+
+    
+  .PageWrapper{
+    margin: 20px 50px; 
+    padding: 15px 0px; 
+  }
+
   
   .Form form {
     display: flex;
@@ -37,5 +44,5 @@
     margin-bottom: 30px;
     padding: 15px 5px;
   }
-  
+
   /* style error message paragraph */
